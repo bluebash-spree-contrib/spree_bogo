@@ -9,6 +9,10 @@ module SpreeBuyXGetY
       g.test_framework :rspec
     end
 
+    initializer 'spree_volume_pricing.environment', before: 'spree.environment' do |app|
+      require File.join(File.dirname(__FILE__), '../../app/models/spree_buy_x_get_y/configuration.rb')
+    end
+
     initializer 'spree_buy_x_get_y.environment', before: :load_config_initializers do |_app|
       SpreeBuyXGetY::Config = SpreeBuyXGetY::Configuration.new
     end
